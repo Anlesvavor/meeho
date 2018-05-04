@@ -1,0 +1,119 @@
+Generate: Como el comando lo dice, se encarga de ccrear/generar archivos,
+ para este ejemplo es un archivo de migraci'on.
+
+ Migration: El tipo de archivo que usar'a generate. Recuerda
+ especificar el nombre y el tipo del campo.
+
+ anlesvavor@verbundet:~/meeho$ rails generate migration create_events name:string start_date:datetime end_date:datetime max_students:integer description:text
+
+Bundle: se ecnarga de resolver las dependecias de nuestro proyecto
+
+Gemas: Son librer
+
+Bundle install
+
+
+db:migrate: Aplicar'a los cambios contenidos en los archivos de migraci'on de nuestro proyecto.
+
+
+anlesvavor@verbundet:~/meeho$ rails generate model event --no-migration
+
+rails console
+
+
+
+Loading development environment (Rails 5.1.6)
+irb(main):001:0> Event.all
+  Event Load (0.3ms)  SELECT  "events".* FROM "events" LIMIT $1  [["LIMIT", 11]]
+=> #<ActiveRecord::Relation []>
+irb(main):002:0> Event.count
+   (0.9ms)  SELECT COUNT(*) FROM "events"
+=> 0
+irb(main):003:0> event_1 = Event.new(name: "RubySchool", start_date: DateTime.now, end_date: 6.weeks.from_now)
+=> #<Event id: nil, name: "RubySchool", start_date: "2018-04-27 02:05:25", end_date: "2018-06-08 02:05:25", max_students: nil, description: nil>
+
+
+
+   (0.3ms)  BEGIN
+  SQL (1.1ms)  INSERT INTO "events" ("name", "start_date", "end_date") VALUES ($1, $2, $3) RETURNING "id"  [["name", "RubySchool"], ["start_date", "2018-04-27 02:05:25.324108"], ["end_date", "2018-06-08 02:05:25.324239"]]
+   (1.5ms)  COMMIT
+=> true
+irb(main):005:0> 
+
+
+irb(main):005:0> Event.count
+   (0.8ms)  SELECT COUNT(*) FROM "events"
+=> 1
+irb(main):006:0> Event.all
+  Event Load (0.6ms)  SELECT  "events".* FROM "events" LIMIT $1  [["LIMIT", 11]]
+=> #<ActiveRecord::Relation [#<Event id: 1, name: "RubySchool", start_date: "2018-04-27 02:05:25", end_date: "2018-06-08 02:05:25", max_students: nil, description: nil>]>
+
+
+irb(main):007:0> event_2 = Event.new(name: "Tomorrowland", start_date: DateTime.new(2018, 06, 20), end_date: DateTime.new(2018, 06, 29))
+=> #<Event id: nil, name: "Tomorrowland", start_date: "2018-06-20 00:00:00", end_date: "2018-06-29 00:00:00", max_students: nil, description: nil>
+irb(main):008:0> 
+
+
+irb(main):012:0> Event.destroy_all
+  Event Load (0.8ms)  SELECT "events".* FROM "events"
+   (0.3ms)  BEGIN
+  SQL (0.7ms)  DELETE FROM "events" WHERE "events"."id" = $1  [["id", 1]]
+   (1.3ms)  COMMIT
+   (0.3ms)  BEGIN
+  SQL (0.5ms)  DELETE FROM "events" WHERE "events"."id" = $1  [["id", 2]]
+   (1.1ms)  COMMIT
+=> [#<Event id: 1, name: "RubySchool", start_date: "2018-04-27 02:05:25", end_date: "2018-06-08 02:05:25", max_students: nil, description: nil>, #<Event id: 2, name: "Tomorrowland", start_date: "2018-06-20 00:00:00", end_date: "2018-06-29 00:00:00", max_students: nil, description: nil>]
+irb(main):013:0> 
+
+rails test
+
+
+
+anlesvavor@verbundet:~/meeho$ rails test
+Running via Spring preloader in process 6061
+Run options: --seed 13684
+
+# Running:
+
+
+
+Finished in 0.000954s, 0.0000 runs/s, 0.0000 assertions/s.
+0 runs, 0 assertions, 0 failures, 0 errors, 0 skips
+
+
+anlesvavor@verbundet:~/meeho$ rails generate scaffold_controller Event name:string start_date:datatime end_date:datetime max_students:integer description:text
+Running via Spring preloader in process 18405
+      create  app/controllers/events_controller.rb
+      invoke  erb
+      create    app/views/events
+      create    app/views/events/index.html.erb
+      create    app/views/events/edit.html.erb
+      create    app/views/events/show.html.erb
+      create    app/views/events/new.html.erb
+      create    app/views/events/_form.html.erb
+      invoke  test_unit
+      create    test/controllers/events_controller_test.rb
+      invoke  helper
+      create    app/helpers/events_helper.rb
+      invoke    test_unit
+      invoke  jbuilder
+      create    app/views/events/index.json.jbuilder
+      create    app/views/events/show.json.jbuilder
+      create    app/views/events/_event.json.jbuilder
+
+
+
+HTTP & REST: DEFINICION
+
+HTTP:
+  GET 
+  PUT 
+  POST
+  DELETE
+
+Codigo de respuestas:
+1xx: informativo
+2xx: Exitoso
+3xx: redirecci'on
+4xx: Error del cliente
+5xx: Error del servidor
