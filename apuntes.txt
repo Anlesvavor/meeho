@@ -117,3 +117,19 @@ Codigo de respuestas:
 3xx: redirecci'on
 4xx: Error del cliente
 5xx: Error del servidor
+
+
+ActiveRecord tiene varias maneras de ralacionar los datos
+
+
+belongs_to Se ysa para relacionar un modelo a otro en una relaci;on de uno a...
+La llave for;anea se encuentra en la tabla
+
+has_one Sirve tambien para relacion uno a .. pero es del otro lado de donde se encuentra la llave foranea
+has_many Relacion de muchos a ...
+has_many_and_belongs_to_many Cuando tiene una tabla intermedia para una relaci;on de muchos a muchos, para no tener que relacionar
+manualmente las ttres tablas.
+
+anlesvavor@verbundet:~/meeho$ rails generate migration CreateEventsUsers
+
+
